@@ -8,6 +8,8 @@ use Maatwebsite\Excel\Concerns\RegistersEventListeners;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Events\AfterSheet;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
+use PhpOffice\PhpSpreadsheet\Style\Font;
 
 class XlsxDataExport implements FromCollection, WithEvents,WithHeadings
 {
@@ -78,6 +80,41 @@ class XlsxDataExport implements FromCollection, WithEvents,WithHeadings
 
                     $start = $mergeHeight + $start;
                 }
+
+                end($this->header);
+
+                $errKey = key($this->header);
+
+                $getDeleGate = $afterSheet->sheet->getDelegate();
+
+                $getDeleGate->getColumnDimension($errKey)->setWidth(50);
+
+                $getDeleGate
+                    ->getStyle($errKey .'1')->applyFromArray([
+                        'fill' => [
+                            'fillType' => 'linear', //线性填充，类似渐变
+                            'startColor' => [
+                                'rgb' => 'DC143C' //初始颜色
+                            ],
+                            //结束颜色，如果需要单一背景色，请和初始颜色保持一致
+                            'endColor' => [
+                                'argb' => 'DC143C'
+                            ]
+                        ],
+                        'font' => [
+                            'name' => 'Arial',
+                            'bold' => true,
+                            'italic' => false,
+                            'underline' => Font::UNDERLINE_DOUBLE,
+                            'strikethrough' => false,
+                            'color' => [
+                                'rgb' => '000000'
+                            ]
+                        ],
+                        'alignment' => [
+                            'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                        ],
+                    ]);
             }
         ];
     }

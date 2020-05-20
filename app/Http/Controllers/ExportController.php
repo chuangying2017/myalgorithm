@@ -24,7 +24,7 @@ class ExportController extends Controller
         $all = $this->importExcel(storage_path('app/public/DuoguigeMB.xlsx'),0,$options);
 
         $arr = $this->validProductNum($all, $options['mergeCells']);
-
+        $this->headings[] = '异常提示';
         Excel::store(new XlsxDataExport($arr,$this->headings),date('YmdHis').'-.xlsx','public');
 
       //  Excel::store(new XlsxDataExport($arr, $this->headings),date('YmdHis').'.xlsx','local_xlsx');
