@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "456edaad38f2590a6e56373faec322e0",
+    "content-hash": "951b69cf07000fbf7340ceb692160d8a",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3987,15 +3987,15 @@
         },
         {
             "name": "toolszhang/bigbox",
-            "version": "dev-master",
+            "version": "1.0",
             "dist": {
                 "type": "path",
-                "url": "/mnt/packagist/tools",
-                "reference": "0fc60db44c122a5b8e3e2813bc7c4ec09d4ebc98"
+                "url": "/mnt/project/php/laravel-tools",
+                "reference": "6468ab5861e419f5865d8481f474dbdad638372b"
             },
             "require": {
                 "guzzlehttp/guzzle": "^6.3",
-                "php": "^7.2.5"
+                "php": "^7.0"
             },
             "type": "library",
             "extra": {
@@ -4014,7 +4014,7 @@
                 ]
             },
             "license": [
-                "mit"
+                "MIT"
             ],
             "authors": [
                 {
@@ -4022,7 +4022,10 @@
                     "email": "631711487@qq.com"
                 }
             ],
-            "description": "Tool box"
+            "description": "Tool box",
+            "support": {
+                "issues": "https://github.com/chuangying2017/laravel-tools.git"
+            }
         },
         {
             "name": "vlucas/phpdotenv",
@@ -6366,9 +6369,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "toolszhang/bigbox": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

@@ -19,6 +19,8 @@ class XlsxDataExport implements FromCollection, WithEvents,WithHeadings
 
     protected $header = [];
 
+    protected $standard = 2;//商品规格
+
     public function __construct(array $arr, $header = [])
     {
         $this->arr = $arr;
@@ -38,47 +40,55 @@ class XlsxDataExport implements FromCollection, WithEvents,WithHeadings
     {
         return [
             AfterSheet::class => function(AfterSheet $afterSheet) {
-                $count = array_map(function($arr){
-                    return count($arr);
-                }, $this->arr);
-
-                $mergeCells = [
-                    "商品名称（必填）",
-                    "库存预警",
-                    "商品分类",
-                    "商品图片名称主图-1（必填）",
-                    "商品图片-2",
-                    "商品图片-3",
-                    "商品图片-4",
-                    "商品图片-5",
-                    "商品图片-6",
-                ];
-                $start = 1;
-                $specName = '规格名称';
-                $i = 1;
-                $specArr = [];
-                foreach ($count as $mergeHeight)
+                if ($this->standard == 2)
                 {
-                    foreach ($mergeCells as $cell)
+                    $count = array_map(function($arr){
+                        return count($arr);
+                    }, $this->arr);
+                    $mergeCells = [
+                        "商品名称（必填）",
+                        "库存预警",
+                        "商品分类",
+                        "商品图片名称主图-1（必填）",
+                        "商品图片-2",
+                        "商品图片-3",
+                        "商品图片-4",
+                        "商品图片-5",
+                        "商品图片-6",
+                    ];
+                    $start = 1;
+                    $specName = '规格名称';
+                    $i = 1;
+                    $specArr = [];
+                    foreach ($count as $mergeHeight)
                     {
-                        if (in_array($specName.$i, $this->header))
+                        if ($mergeHeight < 2)
                         {
-                           $specArr[] = $specName.$i;
+                            $start = $mergeHeight + $start;
+                            continue;
                         }
-                        $titleKey = array_search($cell, $this->header);
-                        $mergeVal = $titleKey.($start+1).':'.$titleKey.($mergeHeight+$start);
-                        $afterSheet->sheet->getDelegate()->mergeCells($mergeVal);
-                        $i+=1;
-                    }
 
-                    foreach ($specArr as $name)
-                    {
-                        $titleKey = array_search($name, $this->header);
-                        $mergeVal = $titleKey.($start+1).':'.$titleKey.($mergeHeight+$start);
-                        $afterSheet->sheet->getDelegate()->mergeCells($mergeVal);
-                    }
+                        foreach ($mergeCells as $cell)
+                        {
+                            if (in_array($specName.$i, $this->header))
+                            {
+                                $specArr[] = $specName.$i;
+                            }
+                            $titleKey = array_search($cell, $this->header);
+                            $mergeVal = $titleKey.($start+1).':'.$titleKey.($mergeHeight+$start);
+                            $afterSheet->sheet->getDelegate()->mergeCells($mergeVal);
+                            $i+=1;
+                        }
 
-                    $start = $mergeHeight + $start;
+                        foreach ($specArr as $name)
+                        {
+                            $titleKey = array_search($name, $this->header);
+                            $mergeVal = $titleKey.($start+1).':'.$titleKey.($mergeHeight+$start);
+                            $afterSheet->sheet->getDelegate()->mergeCells($mergeVal);
+                        }
+
+                        $start = $mergeHeight + $start;
+                    }
                 }
 
                 end($this->header);
