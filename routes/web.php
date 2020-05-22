@@ -19,4 +19,4 @@ Route::get('/', function () {
 Route::get('/test', function(){
     dd(storage_path());
 });
-
+Route::get('/logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
