@@ -67,7 +67,7 @@
   "repositories": {
     "toolszhang/bigbox": {
       "type": "path",
-      "url": "/mnt/project/php/laravel-tools"
+      "url": "/mnt/packagist/tools"
     }
   }
 }
