@@ -9,8 +9,8 @@ class BaseRequest extends FormRequest
 {
     public function failedValidation(Validator $validator)
     {
+        header("HTTP/1.0 401 Unauthorized");
         exit(json_encode([
-            'status' => 500,
             'msg'   => implode(',', $validator->errors()->all())
         ]));
     }
