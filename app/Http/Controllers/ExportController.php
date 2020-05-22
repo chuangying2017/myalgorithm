@@ -19,13 +19,10 @@ class ExportController extends Controller
     public function getImportInfo()
     {
         //假设已知 商品名称 需要合并 规格名称需要合并=x未知合并个数 已经合并高度 求: x等于合并多少且如何恒等其他合并个数
-        $options = ['mergeCells' => []];
-//        dd(storage_path('app/public/DuoguigeMB.xlsx'));
-        $all = $this->importExcel(storage_path('app/public/DuoguigeMB.xlsx'),0,$options);
+        $json = Storage::disk('public')->get('test.json');
+        $arr = json_decode($json, true);
 
-        $arr = $this->validProductNum($all, $options['mergeCells']);
-        $this->headings[] = '异常提示';
-        Excel::store(new XlsxDataExport($arr,$this->headings),date('YmdHis').'-.xlsx','public');
+        Excel::store(new XlsxDataExport($arr,array_keys($arr[0][0])),date('YmdHis').'-.xlsx','public');
 
       //  Excel::store(new XlsxDataExport($arr, $this->headings),date('YmdHis').'.xlsx','local_xlsx');
 
@@ -250,5 +247,10 @@ class ExportController extends Controller
         $count = $count - $forEachNum;
 
         $this->xlsNumHead($count);
+    }
+
+    public function save(Request $request)
+    {
+        return $request->post();
     }
 }
