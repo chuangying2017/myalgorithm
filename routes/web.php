@@ -16,7 +16,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/test', function(){
-    dd(storage_path());
-});
+
+
+
 Route::get('/logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+
+Route::post('/put/area_agent_level','AreaAgentController@AreaAgentEdit');
+Route::get('/get/area_agent_level','AreaAgentController@index');
