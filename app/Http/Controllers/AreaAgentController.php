@@ -18,9 +18,9 @@ class AreaAgentController extends Controller
 
     public function index()
     {
-        $all = $this->areaAgentLevelModel::status()->get()->makeHidden([$this->areaAgentLevelModel::CREATED_AT,$this->areaAgentLevelModel::UPDATED_AT]);
+        $all = $this->areaAgentLevelModel::status()->paginate(10);
 
-        return new AreaAgentResource($all);
+        return $all;
     }
 
     public function AreaAgentEdit(AreaAgentLevelRequest $agentLevelRequest)

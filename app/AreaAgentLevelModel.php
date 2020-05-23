@@ -12,6 +12,7 @@ class AreaAgentLevelModel extends Model
 
     const STATUS_ACTIVE = 'active';//活跃
     const STATUS_FORBIDDEN = 'forbidden';//禁用
+    protected $hidden = [self::CREATED_AT, self::UPDATED_AT];
 
     public function scopeStatus($query)
     {
