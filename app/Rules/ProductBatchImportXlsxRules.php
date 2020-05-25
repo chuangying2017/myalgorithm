@@ -25,7 +25,7 @@ class ProductBatchImportXlsxRules implements Rule
      */
     public function passes($attribute, $value)
     {
-        //
+
     }
 
     /**
