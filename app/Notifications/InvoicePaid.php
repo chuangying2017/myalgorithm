@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Channels\VoiceChannel;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -29,7 +30,7 @@ class InvoicePaid extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return [VoiceChannel::class];
     }
 
     /**
