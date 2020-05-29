@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
+use App\Events\QueryEvent;
+use App\Listeners\QueryListen;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
+use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
 
@@ -15,6 +18,9 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
+        QueryExecuted::class => [
+            QueryListen::class
+        ],
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
@@ -28,7 +34,5 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         parent::boot();
-
-        //
     }
 }

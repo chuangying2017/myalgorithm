@@ -11,6 +11,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UserSeeder::class);
+        if (app()->environment() != 'production')
+        {
+            $this->call([
+                AreaAgentLevelSeeder::class
+            ]);
+        }
     }
 }

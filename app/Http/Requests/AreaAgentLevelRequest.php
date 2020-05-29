@@ -19,7 +19,7 @@ class AreaAgentLevelRequest extends BaseRequest
         $data = array_merge($data , $this->some($some, $this->field));
         return $data;
     }
-    private $some = 'nullable|required|numeric|max:6';
+    private $some = 'nullable|required|numeric|max:100';
 
     private $field = [
         'province','city','district'

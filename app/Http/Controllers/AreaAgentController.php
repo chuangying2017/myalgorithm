@@ -6,10 +6,11 @@ use App\AreaAgentLevelModel;
 use App\Http\Requests\AreaAgentLevelRequest;
 use App\Http\Resources\AreaAgentResource;
 use App\Rules\AreaAgentRule;
-use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Container\Container;
+use Illuminate\Contracts\Events\Dispatcher;
+use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\ValidationException;
 
 class AreaAgentController extends Controller
 {
@@ -53,8 +54,8 @@ class AreaAgentController extends Controller
             {
                 throw new \Exception($validate->errors()->first());
             }
-            return ['msg'=>'success'];
-            $model = $this->areaAgentLevelModel::query()->create($agentLevelRequest->post());
+            $model = $this->areaAgentLevelModel->dataFilter($agentLevelRequest->post());
+            throw_if(!$model->save(), \Exception::class, '数据保存失败');
             return new AreaAgentResource($model);
         }catch (\Exception $exception)
         {

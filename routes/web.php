@@ -23,3 +23,7 @@ Route::get('/logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 
 Route::post('/put/area_agent_level','AreaAgentController@AreaAgentEdit');
 Route::get('/get/area_agent_level','AreaAgentController@index');
+
+Route::get('mail', function(){
+    return (new App\Notifications\InvoicePaid)->toMail('user');
+});
