@@ -18,7 +18,7 @@ class ImgRenameCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Regenerate the file name';
 
     /**
      * Create a new command instance.
@@ -39,7 +39,7 @@ class ImgRenameCommand extends Command
     {
         $imgName = $this->argument('name');
 
-        $path = "C:\\Users\\13059\\Pictures\\Saved Pictures";
+        $path = config('dopant.img_rename');
 
         if (is_dir($path))
         {
