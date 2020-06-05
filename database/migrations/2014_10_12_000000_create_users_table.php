@@ -110,8 +110,8 @@ class CreateUsersTable extends Migration
            $table->enum('status', ['active','forbidden'])->default('active')->comment('默认活跃');
            $table->enum('type', ['assign','common'])->default('assign')->comment('使用类型指定或通用');
            $table->decimal('money',10,2)->default(0.00)->comment('优惠金额');
-           $table->timestamp('start_time');
-           $table->timestamp('end_time');
+           $table->timestamp('start_time')->nullable();
+           $table->timestamp('end_time')->nullable();
            $table->timestamps();
            $table->softDeletes();
         });

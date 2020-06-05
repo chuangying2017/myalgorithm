@@ -2,7 +2,9 @@
 
 namespace App\Console;
 
+use App\Console\Commands\ExportDatabaseTableCommand;
 use App\Console\Commands\ImgRenameCommand;
+use App\Console\Commands\TcpServerCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -15,6 +17,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         ImgRenameCommand::class,
+        TcpServerCommand::class,
+        ExportDatabaseTableCommand::class,
     ];
 
     /**

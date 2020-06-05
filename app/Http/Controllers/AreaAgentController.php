@@ -10,6 +10,7 @@ use Illuminate\Container\Container;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class AreaAgentController extends Controller
@@ -62,5 +63,14 @@ class AreaAgentController extends Controller
             return ['msg' => $exception->getMessage()];
         }
 
+    }
+
+    /**
+     *
+     */
+    public function edit()
+    {
+        //编辑 展示
+        DB::table();
     }
 }
